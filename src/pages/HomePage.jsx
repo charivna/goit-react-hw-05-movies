@@ -9,7 +9,6 @@ const Homepage = () => {
 
   useEffect(() => {
     API.fetchTrendingMovies().then(({ results }) => {
-      console.log(results);
       setMovies(results);
     });
   }, []);
