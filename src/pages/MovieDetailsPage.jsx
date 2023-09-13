@@ -10,6 +10,7 @@ export const MovieDetails = () => {
   let releaseYear = null;
 
   useEffect(() => {
+    if (!movieId) return;
     fetchMovieById(movieId).then(data => {
       setMovieDetails(data);
       console.log(data);
