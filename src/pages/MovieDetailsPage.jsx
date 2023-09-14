@@ -13,7 +13,6 @@ export const MovieDetails = () => {
     if (!movieId) return;
     fetchMovieById(movieId).then(data => {
       setMovieDetails(data);
-      console.log(data);
     });
   }, [movieId]);
 

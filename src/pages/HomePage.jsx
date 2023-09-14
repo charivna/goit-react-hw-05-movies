@@ -9,6 +9,10 @@ const Homepage = () => {
 
   useEffect(() => {
     API.fetchTrendingMovies().then(({ results }) => {
+      if (results.length === 0) {
+        alert(`No trending today`);
+        return;
+      }
       setMovies(results);
     });
   }, []);
