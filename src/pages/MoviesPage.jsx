@@ -6,7 +6,7 @@ export const MoviesSearch = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const location = useLocation();
-  const backLink = useRef(location.state?.from || '/');
+  const backLink = useRef(location.state?.from || '/movies');
   const getQuery = new URLSearchParams(location.search).get('query');
   const [searchParams, setSearchParams] = useState(getQuery ? getQuery : '');
 
