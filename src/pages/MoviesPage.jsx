@@ -12,10 +12,6 @@ export const MoviesSearch = () => {
 
   useEffect(() => {
     fetchSearchMovies(searchParams).then(({ results }) => {
-      if (results.length === 0) {
-        alert(`Not match for reaquest`);
-        return;
-      }
       setMovies(results);
     });
   }, [searchParams]);
