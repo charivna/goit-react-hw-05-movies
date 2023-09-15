@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as API from '../services/movie-api';
-import { useLocation } from 'react-router-dom';
 import MovieList from 'components/MovieList';
 
 const Homepage = () => {
