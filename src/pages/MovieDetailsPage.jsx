@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieById } from 'services/movie-api';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
@@ -24,9 +24,7 @@ export const MovieDetails = () => {
     <>
       {movieDetails && (
         <>
-          <Link to={backLink.current}>
-            <button>Go back</button>
-          </Link>
+          <Link to={backLink.current}>Go back</Link>
 
           <img
             src={`https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`}
@@ -69,3 +67,4 @@ export const MovieDetails = () => {
     </>
   );
 };
+export default MovieDetails;

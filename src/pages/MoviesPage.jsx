@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchSearchMovies } from 'services/movie-api';
 
-export const MoviesSearch = () => {
+const MoviesSearch = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const location = useLocation();
@@ -55,8 +55,8 @@ export const MoviesSearch = () => {
               <Link
                 to={{
                   pathname: `/movies/${movie.id}`,
-                  state: { from: { location } },
                 }}
+                state={{ from: location }}
               >
                 {movie.title}
               </Link>
@@ -67,3 +67,5 @@ export const MoviesSearch = () => {
     </>
   );
 };
+
+export default MoviesSearch;
