@@ -9,8 +9,6 @@ const MoviesSearch = () => {
   const location = useLocation();
   const backLink = useRef(location.state?.from || '/movies');
 
-  const film = searchParams.get('film') ?? '';
-
   const handleChange = evt => {
     setQuery(evt.target.value);
   };
