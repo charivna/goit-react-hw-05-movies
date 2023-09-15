@@ -20,6 +20,8 @@ const MovieDetails = () => {
     releaseYear = movieDetails.release_date.slice(0, 4);
   }
 
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   return (
     <>
       {movieDetails && (
@@ -27,8 +29,13 @@ const MovieDetails = () => {
           <Link to={backLink.current}>Go back</Link>
 
           <img
-            src={`https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`}
-            alt={movieDetails.title}
+            src={
+              movieDetails.poster_path
+                ? `https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`
+                : defaultImg
+            }
+            width={250}
+            alt="poster"
           />
           <h2>
             {movieDetails.title} ({releaseYear})

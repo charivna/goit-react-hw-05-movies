@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import * as API from '../services/movie-api';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import MovieList from 'components/MovieList';
 
 const Homepage = () => {
   const [movies, setMovies] = useState([]);
-
-  const location = useLocation();
 
   useEffect(() => {
     API.fetchTrendingMovies().then(({ results }) => {
@@ -23,18 +22,7 @@ const Homepage = () => {
 
       {movies && (
         <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link
-                to={{
-                  pathname: `/movies/${movie.id}`,
-                  state: { from: { location } },
-                }}
-              >
-                {movie.title}
-              </Link>
-            </li>
-          ))}
+          <MovieList movies={movies} />
         </ul>
       )}
     </>

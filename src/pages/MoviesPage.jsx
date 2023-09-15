@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import MovieList from 'components/MovieList';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from 'services/movie-api';
 
 const MoviesSearch = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
-  const backLink = useRef(location.state?.from || '/movies');
 
   const handleChange = evt => {
     setQuery(evt.target.value);
@@ -19,6 +18,7 @@ const MoviesSearch = () => {
       alert('Please enter text');
       return;
     }
+
     setSearchParams({ film: query });
     setQuery('');
   };
@@ -32,26 +32,13 @@ const MoviesSearch = () => {
 
   return (
     <>
-      <Link to={backLink.current}>Go back</Link>
-
       <form action="submit" onSubmit={handleSubmit}>
         <input onChange={handleChange} value={query}></input>
         <button>Search</button>{' '}
       </form>
       {movies.length > 0 && (
         <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link
-                to={{
-                  pathname: `/movies/${movie.id}`,
-                }}
-                state={{ from: location }}
-              >
-                {movie.title}
-              </Link>
-            </li>
-          ))}
+          <MovieList movies={movies} />
         </ul>
       )}
     </>
