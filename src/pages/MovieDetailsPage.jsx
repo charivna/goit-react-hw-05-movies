@@ -1,19 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieById } from 'services/movie-api';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [loader, setLoader] = useState(false);
   const location = useLocation();
   const backLink = useRef(location.state?.from || '/');
   let releaseYear = null;
 
   useEffect(() => {
     if (!movieId) return;
-    fetchMovieById(movieId).then(data => {
-      setMovieDetails(data);
-    });
+    setLoader(true);
+    fetchMovieById(movieId)
+      .then(data => {
+        setMovieDetails(data);
+      })
+      .finally(() => setLoader(false));
   }, [movieId]);
 
   if (movieDetails) {
@@ -24,6 +29,7 @@ const MovieDetails = () => {
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   return (
     <>
+      {loader && <Loader />}
       {movieDetails && (
         <>
           <Link to={backLink.current}>Go back</Link>
