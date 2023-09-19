@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from 'services/movie-api';
 import { Loader } from 'components/Loader/Loader';
+import { Button, Form, Input, List, WraperToday } from './Pages.staled';
 
 const MoviesSearch = () => {
   const [movies, setMovies] = useState([]);
@@ -36,18 +37,22 @@ const MoviesSearch = () => {
   }, [searchParams]);
 
   return (
-    <>
-      <form action="submit" onSubmit={handleSubmit}>
-        <input onChange={handleChange} value={query}></input>
-        <button>Search</button>
+    <WraperToday>
+      <Form action="submit" onSubmit={handleSubmit}>
+        <Input
+          onChange={handleChange}
+          value={query}
+          placeholder="What film do you want?"
+        ></Input>
+        <Button>Search</Button>
         {loader && <Loader />}
-      </form>
+      </Form>
       {movies.length > 0 && (
-        <ul>
+        <List>
           <MovieList movies={movies} />
-        </ul>
+        </List>
       )}
-    </>
+    </WraperToday>
   );
 };
 

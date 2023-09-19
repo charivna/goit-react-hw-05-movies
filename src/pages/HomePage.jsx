@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as API from '../services/movie-api';
 import MovieList from 'components/MovieList/MovieList';
 import { Loader } from 'components/Loader/Loader';
+import { List, Title, WraperToday } from './Pages.staled';
 
 const Homepage = () => {
   const [movies, setMovies] = useState([]);
@@ -21,15 +22,15 @@ const Homepage = () => {
   }, []);
 
   return (
-    <>
-      <h1>Trending today</h1>
+    <WraperToday>
+      <Title>Trending today</Title>
       {loader && <Loader />}
       {movies && (
-        <ul>
+        <List>
           <MovieList movies={movies} />
-        </ul>
+        </List>
       )}
-    </>
+    </WraperToday>
   );
 };
 

@@ -1,17 +1,19 @@
 import { Suspense } from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { List } from './Layout.styled';
+import { StyledLink } from './Layout.styled';
 
 const Layout = () => {
   return (
     <>
-      <ul>
+      <List>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <StyledLink to="/">Home</StyledLink>
         </li>
         <li>
-          <NavLink to="/movies">Movies</NavLink>
+          <StyledLink to="/movies">Movies</StyledLink>
         </li>
-      </ul>
+      </List>
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
