@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchSearchMovies } from 'services/movie-api';
 import { Loader } from 'components/Loader/Loader';
 import { Button, Form, Input, List, WraperToday } from './Pages.staled';
+import { ToastContainer, toast } from 'react-toast';
 
 const MoviesSearch = () => {
   const [movies, setMovies] = useState([]);
@@ -19,7 +20,7 @@ const MoviesSearch = () => {
     evt.preventDefault();
 
     if (query.trim() === '') {
-      alert('Please enter text');
+      toast.error('Please enter your query');
       return;
     }
 
@@ -52,6 +53,7 @@ const MoviesSearch = () => {
           <MovieList movies={movies} />
         </List>
       )}
+      <ToastContainer position="top-right" delay="3000" />
     </WraperToday>
   );
 };

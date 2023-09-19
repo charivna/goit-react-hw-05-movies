@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'services/movie-api';
+import { CardActor, CardText, CastList, Name } from './Cast.styled';
 
 export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
-
+  const message = "We don't have any cast for this movie.";
   useEffect(() => {
     if (!movieId) return;
     fetchMovieCredits(movieId).then(({ cast }) => {
@@ -16,24 +17,28 @@ export default function Cast() {
 
   const imgurl = 'https://image.tmdb.org/t/p/w300';
 
-  // const defaultImg =
-  //   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   return (
     <>
       {cast && (
-        <ul>
+        <CastList>
           {cast.map(({ id, name, character, profile_path }) => (
-            <li key={id}>
-              {profile_path && (
-                <img width="100" src={`${imgurl}${profile_path}`} alt={name} />
-              )}
-
-              <p>{name}</p>
-              <p>Character: {character}</p>
-            </li>
+            <CardActor key={id}>
+              <img
+                width="150"
+                src={profile_path ? `${imgurl}${profile_path}` : defaultImg}
+                alt={name}
+              />
+              <CardText>
+                <Name>{name}</Name>
+                <p>Character: {character}</p>
+              </CardText>
+            </CardActor>
           ))}
-        </ul>
+        </CastList>
       )}
+      {cast.length === 0 && message}
     </>
   );
 }
