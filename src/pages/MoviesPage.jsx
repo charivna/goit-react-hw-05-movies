@@ -24,7 +24,7 @@ const MoviesSearch = () => {
       return;
     }
 
-    setSearchParams(query);
+    setSearchParams({ query });
     setQuery('');
   };
 
