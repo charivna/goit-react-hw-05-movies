@@ -30,7 +30,7 @@ const MoviesSearch = () => {
 
   useEffect(() => {
     setLoader(true);
-    fetchSearchMovies(searchParams)
+    fetchSearchMovies(searchParams.get('query'))
       .then(({ results }) => {
         setMovies(results);
       })
@@ -39,7 +39,7 @@ const MoviesSearch = () => {
 
   return (
     <WraperToday>
-      <Form action="submit" onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Input
           onChange={handleChange}
           value={query}
